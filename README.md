@@ -1,2 +1,2 @@
 # TrafficJam_DataAugmentation
-Data Augmentation HW - e.x Traffic Jam Samples
+Data Augmentation HW - Traffic Jam Samples
