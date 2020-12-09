@@ -17,6 +17,10 @@ from PIL import Image
 import add_noise
 import flip_yaxis
 import rotation_angular
+import dithering
+import splitter
+import cropper
+
 
 print('code executed!') 
 
@@ -29,6 +33,7 @@ print('code executed!')
 # Open the image form working directory
 #image = Image.open('/Users/CagriCivici/Desktop/python_ws/data_augmentation/jamtraffic/images.jpeg')
 # summarize some details about the image
+
 
 path_aug = '/Users/CagriCivici/Desktop/python_ws/data_augmentation/augmented/'#path for augmented images
 
@@ -53,7 +58,7 @@ images_count = len(imgs)
 for i in range(images_count):
     img_name = imgs[i].filename.split('/')
     img_name = img_name[(len(imgs[i].filename.split('/'))-1)]
-    r1 = random.randint(0, 2)
+    r1 = random.randint(0, 5)
     #pic_name = imgs[i].filename[len(imgs[i].filename.split('/'))-1]
     
     
@@ -65,10 +70,25 @@ for i in range(images_count):
         print(str(i) +"th adding noise process")
         add_noise.noising(path_aug,imgs[i],img_name)         #point to augmented file 
        
-    else : 
+    elif(r1==2) : 
         print(str(i) +"th horizontal flip")
         flip_yaxis.flipping(path_aug,imgs[i],img_name)      #point to augmented file 
-
+    elif(r1==3):
+        print(str(i) + "th RGB to black&white convert")
+        dithering.rgb_to_wh(path_aug,imgs[i],img_name)
+    elif(r1==4):
+        print(str(i) + "th splitting image")
+        splitter.splitting(path_aug,imgs[i],img_name)
+    else:
+        print(str(i) + "th cropped image")
+        cropper.cropping(path_aug,imgs[i],img_name)
+        
+    
+    
+    
+              
+        
+        
 
 
 
