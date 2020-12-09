@@ -13,14 +13,10 @@ import PIL
 from PIL import Image
 #out = im.transpose(PIL.Image.FLIP_LEFT_RIGHT)
 
+
 import add_noise
 import flip_yaxis
 import rotation_angular
-import headingpic
-
-
-
-
 
 print('code executed!') 
 
@@ -34,19 +30,19 @@ print('code executed!')
 #image = Image.open('/Users/CagriCivici/Desktop/python_ws/data_augmentation/jamtraffic/images.jpeg')
 # summarize some details about the image
 
-path = '/Users/CagriCivici/Desktop/python_ws/data_augmentation/jamtraffic/' #path 
+path_aug = '/Users/CagriCivici/Desktop/python_ws/data_augmentation/augmented/'#path for augmented images
 
 
 imgs = []
-#path = "/home/tony/pictures"
 
 
+#get all images from path : original_pic
 valid_images = [".jpg",".gif",".jpeg",".tga"]
-for f in os.listdir(path):
+for f in os.listdir(path_aug):
     ext = os.path.splitext(f)[1]
     if ext.lower() not in valid_images:
         continue
-    imgs.append(Image.open(os.path.join(path,f)))
+    imgs.append(Image.open(os.path.join(path_aug,f)))
     
 print('loaded ' + str(len(imgs))+ ' images')
 
@@ -59,24 +55,20 @@ for i in range(images_count):
     img_name = img_name[(len(imgs[i].filename.split('/'))-1)]
     r1 = random.randint(0, 2)
     #pic_name = imgs[i].filename[len(imgs[i].filename.split('/'))-1]
+    
+    
     if (r1==0): 
         print(str(i) + "th angular rotaion process")
-        #angular_rotation(path,imgs[i],img_name)
-        rotation_angular.rotating(path,imgs[i],img_name)
+        rotation_angular.rotating(path_aug,imgs[i],img_name) #point to augmented file 
         
     elif (r1==1):        
         print(str(i) +"th adding noise process")
-        #adding_noise(path,imgs[i],img_name)
-        add_noise.noising(path,imgs[i],img_name)
+        add_noise.noising(path_aug,imgs[i],img_name)         #point to augmented file 
        
     else : 
         print(str(i) +"th horizontal flip")
-        flip_yaxis.flipping(path,imgs[i],img_name)
-        #horizontal_flip(path,imgs[i],img_name)
+        flip_yaxis.flipping(path_aug,imgs[i],img_name)      #point to augmented file 
 
-
-
-#headingpic.gathering(path)
 
 
 
