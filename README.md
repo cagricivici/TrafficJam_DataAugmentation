@@ -1,5 +1,5 @@
 ## Data Augmentation - Image Manipulation
-Data Augmentation HW - Traffic Jam Samples
+Traffic Jam Samples
 
 
 ![original_imagess](https://user-images.githubusercontent.com/49865957/101813775-3ba2ee00-3b2e-11eb-8b32-2adc96ef946a.jpeg)
