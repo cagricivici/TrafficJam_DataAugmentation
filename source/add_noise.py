@@ -6,6 +6,7 @@ Created on Tue Dec  8 21:19:30 2020
 @author: CagriCivici
 """
 #this script serves adding random noise on images
+#opencv for noising
 
 #importing libs
 import numpy as np
@@ -15,31 +16,37 @@ from skimage import util
 import PIL
 from PIL import Image
 
+import cv2 as cv
 
-# skimage.util.random_noise(image[, mode, …])
-# Function to add random noise of various types to a floating-point image.
-#https://scikit-image.org/docs/dev/api/skimage.util.html  
+#adding noise on image with the help of OpenCV module
+#Gaussian Noise selected...
 
 
-def noising (path,image,name): 
+def noising (path,img_path,imgname): 
     
-    path = path
-    name = name
-    img = np.array(image)
-
-    #adding random noise with skimage
-    #mode: salt!
-    noise_salt_img = util.random_noise(img,mode = 'salt')
+    s_path = path        #saving directory
+    path = img_path      #fetch image directory
+    name = imgname       #saving image with sutiable prefix name
     
-    #converting images to visualable with mulplying by 255
-    #
-    noise_img = np.array(255*noise_salt_img, dtype = 'uint8')
     
-    #from piloow lib: 
-    #saving an RGB image using PIL. Now we can use fromarray to create a PIL image from the numpy array
-    #https://www.pythoninformer.com/python-libraries/numpy/numpy-and-images/
-    #Image.fromarray(noised_image, "RGB): transform to pillow image from numpy array
-    imgk = Image.fromarray(noise_img, "RGB")
+    image = cv.imread(path)     #get image with opencv
     
+    #Generate Gaussian Noise 
+    gauss = np.random.normal(0,1,image.size)
+    gauss = gauss.reshape(image.shape[0],image.shape[1],image.shape[2]).astype('uint8')
+    
+    #adding noise on image
+    image_noise = cv.add(image, gauss)
     #saving image
-    imgk.save(path+'noise_'+name)
+    cv.imwrite(s_path+ 'ns_'+name, image_noise)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

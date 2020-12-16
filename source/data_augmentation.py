@@ -66,7 +66,7 @@ def main():
 
         elif (r1==1):
             print(str(i) +"th adding noise process")
-            add_noise.noising(path_aug,imgs[i],img_name)         #adding noise on images
+            add_noise.noising(path_aug,imgs[i].filename,img_name)         #adding noise on images
 
         elif(r1==2) :
             print(str(i) +"th horizontal flip")
@@ -78,7 +78,7 @@ def main():
 
         elif(r1==4):
             print(str(i) + "th splitting image")
-            splitter.splitting(path_aug,imgs[i],img_name)       #splitting
+            splitter.splitting(path_aug,imgs[i].filename,img_name)       #splitting
 
         else:
             print(str(i) + "th cropped image")
